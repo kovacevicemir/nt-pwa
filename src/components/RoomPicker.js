@@ -29,6 +29,7 @@ const RoomPicker = () => {
       <Grid className={classes.gridSize} container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
           <Typography variant="h3">Hospital Map</Typography>
+          <p>testing pipeline...</p>
           <br />
         </Grid>
           <Grid item xs={12} md={4}>
