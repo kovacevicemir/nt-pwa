@@ -9,8 +9,8 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "sudo rm -rf /var/www/reactpwa/"
-                sh "sudo cp -r ${WORKSPACE}/build/ /var/www/reactpwa/"
+                sh "sudo rm -rf /var/www/ninjareact/"
+                sh "sudo cp -r ${WORKSPACE}/build/ /var/www/ninjareact/"
             }
         }
     }
