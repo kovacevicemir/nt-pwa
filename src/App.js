@@ -11,6 +11,9 @@ function App() {
 
   useEffect(() => {
     async function fetchMyAPI() {
+
+      console.log("fetchingMyApi... inner clg App.js");
+
       let res = await CDB.get("/ntdb/_all_docs",{
         responseType:"json"
       })
