@@ -4,8 +4,22 @@ import "./App.css";
 import RoomPicker from "./components/RoomPicker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import RoomDetails from "./components/RoomDetails";
+import CDB from "./services/CDB";
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      let res = await CDB.get("/ntdb/_all_docs",{
+        responseType:"json"
+      })
+      console.log(res.data.rows);
+    }
+
+    fetchMyAPI()
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>

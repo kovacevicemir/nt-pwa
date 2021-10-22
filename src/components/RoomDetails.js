@@ -3,6 +3,12 @@ import React from "react";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 
+import CDB from "../services/CDB";
+import { useEffect } from "react";
+
+
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -20,6 +26,19 @@ const useStyles = makeStyles((theme) => ({
 
 const RoomDetails = () => {
   let params = useParams();
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      // let res = await CDB.get(`/ntdb/${params.id}`,{
+      let res = await CDB.get(`/ntdb/7c740198366892c9b86828e543b786da`,{
+        responseType:"json"
+      })
+      console.log(res.data);
+    }
+
+    fetchMyAPI()
+  }, [])
+
   const classes = useStyles();
   return (
     <Paper elevation={3} className={classes.root}>
