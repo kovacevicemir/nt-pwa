@@ -13,6 +13,7 @@ function App() {
     async function fetchMyAPI() {
 
       console.log("fetchingMyApi... inner clg App.js");
+      console.log(process.env.REACT_APP_CLOUDANT_URL)
 
       let res = await CDB.get("/ntdb/_all_docs",{
         responseType:"json"
