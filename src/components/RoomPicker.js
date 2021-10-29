@@ -20,10 +20,12 @@ const RoomPicker = () => {
   const classes = useStyles();
   const history = useHistory();
 
+  //On button click, we switch to RoomDetails component using react-router
   const onRoomClickHandler = (roomId) => {
     history.push(`/room-details/${roomId}`);
   };
 
+  //Render RoomPicker component, using grid system [ref: material ui]
   return (
     <div className={classes.root}>
       <Grid className={classes.gridSize} container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>

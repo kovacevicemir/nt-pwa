@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RoomDetails = ({ props }) => {
+  //Heat map options state [ref: react-apex docs]
   const [options, setOptions] = useState({
     chart: {
       id: "apexchart-example",
@@ -48,14 +49,13 @@ const RoomDetails = ({ props }) => {
     xaxis: {
       categories: [1, 2, 3, 4, 5],
     },
-
     plotOptions: { heatmap: { colorScale: { ranges: [{ from: 0, to: 10, color: '#0054ff', name: 'cold', }, {from: 10, to: 20, color: '#0084ff', name: 'cool'}, {from: 30, to: 40, color: '#FFe600', name: "warm"}, { from: 36.1, to: 37.2, color: '#FFbe00', name: 'human', }, { from: 37.2, to: 50, color: '#FF4600', name: 'hot', } ] } } }
-
-    // plotOptions: { heatmap: { colorScale: { ranges: [{ from: -30, to: 5, color: '#00A100', name: 'low', }, { from: 6, to: 20, color: '#128FD9', name: 'medium', }, { from: 21, to: 45, color: '#FFB200', name: 'high', } ] } } }
   })
 
-
+  const classes = useStyles();
   let params = useParams();
+
+  //Heat map data local state
   const [heatMapData, setHeatMapData] = useState([
     {
       name: "0",
@@ -76,6 +76,8 @@ const RoomDetails = ({ props }) => {
       ],
     },
   ]);
+
+  //Entries and exits data local state for each user
   const [roomData, setRoomData] = useState({
     enteringRoom: [
       {
@@ -100,14 +102,12 @@ const RoomDetails = ({ props }) => {
     ],
   });
 
-  console.log("PROPS:", props);
-
+  //Helper function to fetch heatMapData for room.
   async function fetchHeatMapData(dbName) {
+    //First we fetch all docs id`s
     let res = await CDB.get(`/${dbName}/_all_docs`, {
       responseType: "json",
     });
-
-    console.log("this is res: ", res);
 
     //get last heat map entry
     let lastHeatMapData = await CDB.get(
@@ -117,12 +117,12 @@ const RoomDetails = ({ props }) => {
       }
     );
 
-    console.log(res.data);
-    console.log("lastHeatMapData: ", lastHeatMapData);
-
+    // console.log(res.data);
+    // console.log("lastHeatMapData: ", lastHeatMapData);
     // setHeatMapData(lastHeatMapData.data.room);
 
-    if(params.id === "2"){
+    
+    if(params.id === "2"){ //If room id is 2, which means 7x7 size
       setOptions({
         xaxis: {
           categories: [1, 2, 3, 4, 5, 6, 7],
@@ -214,7 +214,7 @@ const RoomDetails = ({ props }) => {
           ],
         },
       ]);
-    }else{
+    }else{//In case of rooms: 1,3,4   size 5x5
       setHeatMapData([
         {
           name: "0",
@@ -270,6 +270,8 @@ const RoomDetails = ({ props }) => {
     }
   }
 
+  //On component render:
+  //Fetch last 2 user entries from database.
   useEffect(() => {
     async function fetchMyAPI() {
       let res = await CDB.get(`/iab330/${props[props.length - 1].id}`, {
@@ -283,40 +285,36 @@ const RoomDetails = ({ props }) => {
       const ourData1 = JSON.parse(res.data.payload);
       const ourData2 = JSON.parse(res2.data.payload);
 
-      console.log(ourData1);
+      //console.log(ourData1);
 
+      //Fetch more data based on room ID:
       switch (params.id) {
         case "1":
           //fetch heat map
           fetchHeatMapData("room_1_heatmap");
 
+          //Set local state for entering and leaving details for last 2 users.
           setRoomData({
             enteringRoom: [ourData1.entering_room_1, ourData2.entering_room_1],
             leavingRoom: [ourData1.leaving_room_1, ourData2.leaving_room_1],
           });
           break;
         case "2":
-          //fetch heat map
           fetchHeatMapData("room_2_heatmap");
-
           setRoomData({
             enteringRoom: [ourData1.entering_room_2, ourData2.entering_room_2],
             leavingRoom: [ourData1.leaving_room_2, ourData2.leaving_room_2],
           });
           break;
         case "3":
-          //fetch heat map
           fetchHeatMapData("room_3_heatmap");
-
           setRoomData({
             enteringRoom: [ourData1.entering_room_3, ourData2.entering_room_3],
             leavingRoom: [ourData1.leaving_room_3, ourData2.leaving_room_3],
           });
           break;
         case "4":
-          //fetch heat map
           fetchHeatMapData("room_4_heatmap");
-
           setRoomData({
             enteringRoom: [ourData1.entering_room_4, ourData2.entering_room_4],
             leavingRoom: [ourData1.leaving_room_4, ourData2.leaving_room_4],
@@ -331,6 +329,7 @@ const RoomDetails = ({ props }) => {
     fetchMyAPI();
   }, []);
 
+  //Helper function, render room entries for each user
   const renderRoomEntries = () => {
     return roomData.enteringRoom.map((entry) => {
       return (
@@ -391,6 +390,7 @@ const RoomDetails = ({ props }) => {
     });
   };
 
+  //Helper function, render room exits for each user
   const renderRoomExits = () => {
     return roomData.leavingRoom.map((entry) => {
       return (
@@ -451,7 +451,7 @@ const RoomDetails = ({ props }) => {
     });
   };
 
-  const classes = useStyles();
+  //Render RoomDetails component [using Grid system, ref: material UI]
   return (
     <Paper elevation={3} className={classes.root}>
       <Grid
