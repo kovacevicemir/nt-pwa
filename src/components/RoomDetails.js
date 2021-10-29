@@ -28,22 +28,32 @@ const useStyles = makeStyles((theme) => ({
   },
   gridClass: {
     display: "flex",
+    flexDirection:"row",
     justifyContent: "center",
     alignItems: "center",
   },
+  centered:{
+    display: "flex",
+    flexDirection:"column",
+    justifyContent: "center",
+    alignItems: "center",
+  }
 }));
 
 const RoomDetails = ({ props }) => {
-  //
-  const options = {
+  const [options, setOptions] = useState({
     chart: {
       id: "apexchart-example",
     },
     xaxis: {
       categories: [1, 2, 3, 4, 5],
     },
-  };
-  //
+
+    plotOptions: { heatmap: { colorScale: { ranges: [{ from: 0, to: 10, color: '#0054ff', name: 'cold', }, {from: 10, to: 20, color: '#0084ff', name: 'cool'}, {from: 30, to: 40, color: '#FFe600', name: "warm"}, { from: 36.1, to: 37.2, color: '#FFbe00', name: 'human', }, { from: 37.2, to: 50, color: '#FF4600', name: 'hot', } ] } } }
+
+    // plotOptions: { heatmap: { colorScale: { ranges: [{ from: -30, to: 5, color: '#00A100', name: 'low', }, { from: 6, to: 20, color: '#128FD9', name: 'medium', }, { from: 21, to: 45, color: '#FFB200', name: 'high', } ] } } }
+  })
+
 
   let params = useParams();
   const [heatMapData, setHeatMapData] = useState([
@@ -112,60 +122,152 @@ const RoomDetails = ({ props }) => {
 
     // setHeatMapData(lastHeatMapData.data.room);
 
-    setHeatMapData([
-      {
-        name: "0",
-        data: [
-          { x: "W1", y: lastHeatMapData.data.Room[0][0] },
-          { x: "W2", y: lastHeatMapData.data.Room[0][1] },
-          { x: "W3", y: lastHeatMapData.data.Room[0][2] },
-          { x: "W4", y: lastHeatMapData.data.Room[0][3] },
-          { x: "W5", y: lastHeatMapData.data.Room[0][4] },
-        ],
-      },
-      {
-        name: "1",
-        data: [
-          { x: "W1", y: lastHeatMapData.data.Room[1][0] },
-          { x: "W2", y: lastHeatMapData.data.Room[1][1] },
-          { x: "W3", y: lastHeatMapData.data.Room[1][2] },
-          { x: "W4", y: lastHeatMapData.data.Room[1][3] },
-          { x: "W5", y: lastHeatMapData.data.Room[1][4] },
-        ],
-      },
-      {
-        name: "2",
-        data: [
-          { x: "W1", y: lastHeatMapData.data.Room[2][0] },
-          { x: "W2", y: lastHeatMapData.data.Room[2][1] },
-          { x: "W3", y: lastHeatMapData.data.Room[2][2] },
-          { x: "W4", y: lastHeatMapData.data.Room[2][3] },
-          { x: "W5", y: lastHeatMapData.data.Room[2][4] },
-        ],
-      },
-      {
-        name: "3",
-        data: [
-          { x: "W1", y: lastHeatMapData.data.Room[3][0] },
-          { x: "W2", y: lastHeatMapData.data.Room[3][1] },
-          { x: "W3", y: lastHeatMapData.data.Room[3][2] },
-          { x: "W4", y: lastHeatMapData.data.Room[3][3] },
-          { x: "W5", y: lastHeatMapData.data.Room[3][4] },
-        ],
-      },
-      {
-        name: "4",
-        data: [
-          { x: "W1", y: lastHeatMapData.data.Room[3][0] },
-          { x: "W2", y: lastHeatMapData.data.Room[3][1] },
-          { x: "W3", y: lastHeatMapData.data.Room[3][2] },
-          { x: "W4", y: lastHeatMapData.data.Room[3][3] },
-          { x: "W5", y: lastHeatMapData.data.Room[3][4] },
-        ],
-      },
-    ]);
-
-    alert(JSON.stringify(lastHeatMapData.data.Room, null, 2));
+    if(params.id === "2"){
+      setOptions({
+        xaxis: {
+          categories: [1, 2, 3, 4, 5, 6, 7],
+        },
+      })
+      setHeatMapData([
+        {
+          name: "1",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[0][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[0][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[0][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[0][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[0][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[0][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[0][6] },
+          ],
+        },
+        {
+          name: "2",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[1][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[1][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[1][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[1][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[1][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[1][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[1][6] },
+          ],
+        },
+        {
+          name: "3",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[2][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[2][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[2][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[2][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[2][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[2][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[2][6] },
+          ],
+        },
+        {
+          name: "4",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[3][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[3][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[3][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[3][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[3][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[3][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[3][6] },
+          ],
+        },
+        {
+          name: "5",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[4][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[4][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[4][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[4][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[4][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[4][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[4][6] },
+          ],
+        },
+        {
+          name: "6",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[5][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[5][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[5][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[5][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[5][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[5][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[5][6] },
+          ],
+        },
+        {
+          name: "7",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[6][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[6][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[6][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[6][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[6][4] },
+            { x: "W6", y: lastHeatMapData.data.Room[6][5] },
+            { x: "W7", y: lastHeatMapData.data.Room[6][6] },
+          ],
+        },
+      ]);
+    }else{
+      setHeatMapData([
+        {
+          name: "0",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[0][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[0][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[0][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[0][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[0][4] },
+          ],
+        },
+        {
+          name: "1",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[1][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[1][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[1][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[1][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[1][4] },
+          ],
+        },
+        {
+          name: "2",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[2][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[2][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[2][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[2][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[2][4] },
+          ],
+        },
+        {
+          name: "3",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[3][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[3][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[3][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[3][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[3][4] },
+          ],
+        },
+        {
+          name: "4",
+          data: [
+            { x: "W1", y: lastHeatMapData.data.Room[4][0] },
+            { x: "W2", y: lastHeatMapData.data.Room[4][1] },
+            { x: "W3", y: lastHeatMapData.data.Room[4][2] },
+            { x: "W4", y: lastHeatMapData.data.Room[4][3] },
+            { x: "W5", y: lastHeatMapData.data.Room[4][4] },
+          ],
+        },
+      ]);
+    }
   }
 
   useEffect(() => {
@@ -360,21 +462,21 @@ const RoomDetails = ({ props }) => {
       >
         <Grid item xs={12}>
           <Typography variant="h4">Room {params.id}#</Typography>
-          <br />
         </Grid>
+        <Grid xs={12}><hr/></Grid>
         <Grid item md={3} xs={0}></Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={2} xs={12}>
           {renderRoomEntries()}
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={2} xs={12}>
           {renderRoomExits()}
         </Grid>
         <Grid item md={3} xs={0}></Grid>
 
-        <Grid item md={4} xs={0}></Grid>
-        <Grid md={4} xs={12}>
+        <Grid xs={12}><hr/></Grid>
+        <Grid md={12} xs={12} className={classes.centered} style={{marginBottom:"10px"}}>
           <br/>
-          <Typography variant="h5">Room Heat Map</Typography>
+          <Typography variant="h5" >Room Heat Map</Typography>
           <Chart
             options={options}
             series={heatMapData}

@@ -28,7 +28,8 @@ const RoomPicker = () => {
     <div className={classes.root}>
       <Grid className={classes.gridSize} container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
-          <Typography variant="h3">Hospital Map</Typography>
+          <Typography color="secondary" variant="h3">Hospital Map</Typography>
+          <Typography color="primary" variant="h6">Ninja Turtles Team</Typography>
           <br />
         </Grid>
           <Grid item xs={12} md={4}>
@@ -95,6 +96,9 @@ const RoomPicker = () => {
           </Grid>
           <Grid item xs={12}>
             <AllRoomsStatus />
+          </Grid>
+          <Grid item xs={12}>
+            <img src="https://i.pinimg.com/564x/a3/7d/39/a37d3958bdd242f57a1b962469fcb635.jpg" />
           </Grid>
       </Grid>
     </div>
