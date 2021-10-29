@@ -77,12 +77,14 @@ const RoomPicker = () => {
               size="large"
               variant="contained"
               color="primary"
+              disabled={true}
             >
               Room 5
             </Button>
           </Grid>
           <Grid item xs={12} md={4}>
             <Button
+              disabled={true}
               onClick={() => onRoomClickHandler(6)}
               size="large"
               variant="contained"

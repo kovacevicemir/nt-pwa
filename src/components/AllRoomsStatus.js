@@ -20,13 +20,13 @@ const AllRoomsStatus = () => {
   return (
     <div className={classes.root}>
       <Typography variant="h6">
-        Available <CountUp style={{color:"green"}} end={11} duration={1} />
+        Total users <CountUp style={{color:"green"}} end={2} duration={1} />
       </Typography>
       <Typography variant="h6">
-        Occupied <CountUp style={{color:"red"}} end={44} duration={1} />
+        Total Rooms <CountUp style={{color:"red"}} end={4} duration={1} />
       </Typography>
       <Typography variant="h6">
-        Reserved <CountUp style={{color:"orange"}} end={27} duration={1} />
+        Total patients <CountUp style={{color:"orange"}} end={127} duration={1} />
       </Typography>
     </div>
   );
